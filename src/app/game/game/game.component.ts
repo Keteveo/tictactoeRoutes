@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { StateService, State } from "./../state.service";
 import { MyhttpService } from "./../../myhttp.service";
-import { identifierModuleUrl } from "@angular/compiler";
 
 @Component({
   selector: "app-game",
