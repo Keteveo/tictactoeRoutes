@@ -1,14 +1,56 @@
 <div *ngIf="_status == 'fetching'" class="loader"></div>
 
 <form *ngIf="(_stateService.state$ | async).player_name === ''">
-	<label>Introduce Player Name:</label>
-	<input [(ngModel)]="_playerName" type="text" name="_playerName">
-	<input (click)="_handleSubmitClick()" type="submit" value="Submit"/>
+  <div class="form-group col-6 ml-auto mr-auto">
+    <label>Introduce Player Name:</label>
+    <input
+      class="form-control"
+      [(ngModel)]="_playerName"
+      type="text"
+      name="_playerName"
+      placeholder="player name"
+      required="required"
+    />
+    <input
+      class="btn-primary mt-2"
+      (click)="_handleSubmitClick()"
+      type="submit"
+      value="Submit"
+    />
+  </div>
 </form>
 
-<div *ngIf="_status == 'success' && (_stateService.state$ | async).player_name !== ''">
-	<app-header></app-header>
-	<app-board></app-board>
+<div
+  *ngIf="
+    _status == 'success' && (_stateService.state$ | async).player_name !== ''
+  "
+>
+  <app-header></app-header>
+  <app-board></app-board>
+  <button class="btn-primary mt-4" (click)="_handleSaveClick()">
+    <i class="fas fa-save"></i> Save Game
+  </button>
 </div>
 
-<h3 *ngIf="_status !== 'success' && _status !== 'fetching'">Error getting state from server. The error was: {{ _status }}</h3>
+<form *ngIf="(_stateService.state$ | async).game_name === 'save'">
+  <label>Introduce Game Name:</label>
+  <input [(ngModel)]="_gameName" type="text" name="_gameName" value="Game" />
+  <input
+    class="btn-primary"
+    (click)="_handleSaveSubmit()"
+    type="submit"
+    value="Submit"
+  />
+</form>
+
+<h3
+  *ngIf="
+    _status !== 'success' && _status !== 'fetching' && _status !== 'nomoresaves'
+  "
+>
+  Error trying to communicate with the server. The error was: {{ _status }}
+</h3>
+
+<h3 *ngIf="_status == 'nomoresaves'">
+  You have deleted all saved games, try starting a new game
+</h3>

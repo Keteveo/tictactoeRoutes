@@ -1,0 +1,27 @@
+<div class="container">
+  <div
+    class="col-5 ml-auto mr-auto"
+    style="text-align:right; text-decoration:none"
+  >
+    <h3>Partidas guardadas:</h3>
+    <ul style="list-style-type:none">
+      <li class="mt-4" *ngFor="let name of _names; let id = index">
+        <span class="btn-secondary btn-sm p-2">{{ name }} </span>
+        <a
+          class="btn-success btn-sm ml-2 mr-2 p-2"
+          [routerLink]="['/continue', id]"
+          routerLinkActive="router-link-active"
+        >
+          <i class="ml-1 mr-2 fas fa-cloud-download-alt"></i> continue</a
+        >
+
+        <a
+          [routerLink]="['/delete', id]"
+          routerLinkActive="router-link-active"
+          class="btn-danger btn-sm p-2"
+          >delete <i class="ml-2 mr-2 fas fa-trash-alt"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
